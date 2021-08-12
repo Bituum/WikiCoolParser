@@ -1,3 +1,5 @@
+package MainLogic;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.sql.Array;
@@ -21,12 +23,12 @@ public class PageParser {
         char[] array;
         List<String> list = new ArrayList<>();
         while((tmp = in.readLine()) != null){
-            if(in.readLine().contains(WantedStr)){
+            if(tmp.contains(WantedStr)){
                 in.readLine();
                 tmp =  in.readLine();
                 array = tmp.toCharArray();
                 String finaleStr;
-                for (int i = tmp.indexOf("title") + 7; i < array.length; i++){
+                for (int i = tmp.indexOf("title") + 7; array[i]!='"'; i++){
                     list.add(String.valueOf(array[i]));
                 }
                 return list.stream()
