@@ -6,11 +6,11 @@ import java.io.InputStreamReader;
 import java.net.URL;
 
 public class Downloader {
-    public static BufferedReader down(){
+    public static BufferedReader down(String CurrentName){
         try {
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(
-                            URLParser.parseURL("https://ru.wikipedia.org/wiki/%D0%94%D0%B6%D0%B5%D0%BA_%D0%9B%D0%BE%D0%BD%D0%B4%D0%BE%D0%BD").openStream()));
+                            URLParser.parseURL("https://ru.wikipedia.org/wiki/" + CurrentName).openStream()));
             return in;
         } catch (IOException e) {
             e.printStackTrace();

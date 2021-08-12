@@ -9,6 +9,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class MainForm extends JFrame {
     private Box MainBox, firstbox, secondbox;
@@ -48,11 +50,16 @@ public class MainForm extends JFrame {
         SearchButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 PageParser result = new PageParser(
-                        Downloader.down(),
-                        textField1.getText()
+                        Downloader.down(textField1.getText())
                 );
                 try {
-                    textArea1.setText(result.strAnalyz());
+                    textArea1.setText("");
+                    List<List<String>> ListArray = result.strAnalyz();
+                    for(int i = 0;i<ListArray.get(1).size();i++){
+                        textArea1.append(ListArray.get(0).get(i) + ": " + ListArray.get(1).get(i) + "\n");
+                    }
+                    //TODO0
+                    //textArea1.setText((result.strAnalyz().stream().collect(Collectors.toList())).stream().collect(Collectors.joining("\n")));
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
                 }
